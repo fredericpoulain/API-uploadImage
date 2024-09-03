@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql
+    container_name: database_test_adictiz_fp
+    restart: always
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+      MYSQL_USER: fred
+      MYSQL_PASSWORD: azazaz
+      MYSQL_DATABASE: db_test_adictiz_fp
+    networks:
+      - dev
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: phpMyAdmin_test_adictiz_fp
+    depends_on:
+      - db
+    ports:
+      - 8080:80
+    environment:
+      PMA_HOST: db
+    networks:
+      - dev
+
+  www:
+    build: docker
+    container_name: www_test_adictiz_fp
+    ports:
+      - "8000:80"
+    volumes:
+      - ./docker/vhosts:/etc/apache2/sites-enabled
+      - ./:/var/www
+    networks:
+      - dev
+
+networks:
+  dev:
+
+volumes:
+  db-data:

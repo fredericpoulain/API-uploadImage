@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard Interface{% endblock %}
+
+{% block body %}
+    <div class="blocMessageFlash">
+        {% for message in app.flashes('success') %}
+            <div class="alert alert-success text-center">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    <div class="container">
+        <h1 class="text-center p-3 my-5">Dashboard</h1>
+        {% if images is defined and images is not empty %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Key</th>
+                    <th scope="col">Image size (octet)</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Thumbnail</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for image in images %}
+                    <tr>
+                        <td>
+                            <a class="" href="{{ image.Url }}" download>
+                                {{ image.Key}}
+                            </a>
+                        </td>
+                        <td>{{ image.Size}}</td>
+                        <td>{{ image.LastModified | date('d/m/Y H\\hi')}}</td>
+                        <td><img src="{{ image.Url }}" class="img-thumbnail" alt="image {{ image.Key}}" style="max-width: 80px;"></td>
+                        <td>
+                            <a href="{{ path('app_admin_delete_image', {'key': image.Key}) }}"
+                               class="btn btn-danger btn-sm"
+                               onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette image ?');">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <div class="pagination justify-content-center">
+                {{ include('paginator/nav.html.twig') }}
+            </div>
+        {% else %}
+            <h3>No images uploaded</h3>
+        {% endif %}
+    </div>
+    <div class="text-center mt-5">
+        <a href="{{ path('app_logout') }}" class="btn btn-warning">Logout</a>
+    </div>
+{% endblock %}

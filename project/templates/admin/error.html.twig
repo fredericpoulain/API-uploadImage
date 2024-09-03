@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Dashboard Error{% endblock %}
+
+{% block body %}
+    <div class="blocMessageFlash">
+        {% for message in app.flashes('error') %}
+            <div class="alert alert-danger text-center">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="text-center">
+        <a href="{{ path('app_logout') }}">Retour</a>
+    </div>
+
+
+
+{% endblock %}
