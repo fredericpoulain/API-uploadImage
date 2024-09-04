@@ -46,11 +46,10 @@ class UploadController extends AbstractController
         $errors = [];
 
         try {
-            //I check all the pictures
+            //We check if all images are valid. This prevents some images from being uploaded and others not.
             foreach ($files as $file) {
                 try {
                     $this->verifImage($imageService, $file);
-                    // Continuer le traitement si l'image est valide...
                 } catch (Exception $e) {
                     $errors[] = $file->getClientOriginalName() . ': ' . $e->getMessage();
                 }

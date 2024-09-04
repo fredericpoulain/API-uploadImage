@@ -75,6 +75,10 @@ symfony console doctrine:schema:update --force
 ```bash
 symfony console d:f:l --no-interaction
 ```
+*****************
+> [!WARNING]
+> ### Si restriction d'accès aux fichiers depuis le container : 
+> `chmod -R 775 /var/www/project` et `chown -R www-data:www-data /var/www/project`
 
 
 ## UTILISATION
@@ -82,7 +86,7 @@ symfony console d:f:l --no-interaction
 ### Ajouter les images: 
 > [!NOTE]
 > Avec un logiciel comme [Postman](https://www.postman.com/)
-#### Endpoints Upload -> POST `/api/upload`
+#### Endpoints Upload -> POST `http://127.0.0.1:8000/api/upload`
 - **Paramètres** : Un ensemble d'images sous le champ images (images[]).
 - **Réponses** :
   - **200 OK** : Lorsque toutes les images sont uploadées avec succès.
@@ -101,8 +105,7 @@ symfony console d:f:l --no-interaction
 
 > [!NOTE]
 > ### Remarque
-> La pagination via S3 présente certaines limitations par rapport à une approche où les informations des images (nom, taille, date, URL) sont enregistrées dans une base de données. Avec S3, la pagination repose sur des tokens et ne permet pas un accès direct aux pages spécifiques, ce qui rend la navigation moins flexible. En revanche, en stockant les métadonnées des images dans une base de données, on peut utiliser des outils comme KnpPaginator, offrant une pagination plus précise et performante, avec la possibilité de sauter directement à une page donnée, de trier les images, et de gérer efficacement de grands ensembles de données avec des requêtes optimisées.
-
+> La pagination via S3 est moins flexible que celle utilisant une base de données. Avec S3, la pagination utilise des tokens et ne permet pas d'accéder directement à des pages spécifiques. En revanche, une base de données permet une pagination plus précise avec des outils comme KnpPaginator, offrant tri, accès direct à une page, et gestion optimisée des données.
 ****************
 
 ## PHPUNIT
