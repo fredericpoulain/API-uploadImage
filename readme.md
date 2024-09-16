@@ -30,7 +30,7 @@ Cette API, développée avec Symfony, permet de gérer l'upload d'images sur un 
 
 ### Étape 1 : Cloner le dépôt
 ```
-git clone git@github.com:fredericpoulain/Test_upload.git .
+git clone git@github.com:fredericpoulain/API-uploadImage.git .
 ```
 ### Étape 2 : Construire l'image Docker
 > [!WARNING]
@@ -46,7 +46,7 @@ docker compose up -d
 
 ### Étape 4 : Entrer dans le conteneur
 ```bash
-docker exec -ti www_test_adictiz_fp bash
+docker exec -ti www_api_upload_image bash
 cd project
 ```
 ### Étape 5 : Installer les dépendances
@@ -56,7 +56,7 @@ composer install
 
 ### Étape 6 : configurer .env.local
 ```
-DATABASE_URL="mysql://root:@database_test_adictiz_fp:3306/db_test_adictiz_fp?serverVersion=9.0.1&charset=utf8mb4"
+DATABASE_URL="mysql://root:@database_api_upload_image:3306/db_api_upload_image?serverVersion=9.0.1&charset=utf8mb4"
 
 AWS_ACCESS_KEY_ID=AKIAxxxxxxxxxxxxxxxx
 AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
